@@ -7,7 +7,7 @@ function Navigation() {
     //its called jsx here!
     <div className="navigation">
       <img src={logo} alt="logo" />
-      <a>Help</a>
+      <a>help</a>
     </div>
   );
 }
