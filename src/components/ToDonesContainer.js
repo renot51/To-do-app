@@ -1,25 +1,20 @@
 import React from "react";
+import ToDoItem from "./ToDoItem";
 
-function ToDonesContainer() {
+const ToDonesContainer = props => {
+  const toDones = props.toDones;
+  const toDonesItems = toDones.map(el => {
+    return <ToDoItem todo={el} key={el.text}></ToDoItem>;
+  });
+
   return (
     <div className="toDonesContainer">
       <div className="list">
-        <h3>BEEN Here done that</h3>
-        <div className="item">
-          <p>make breakfast</p>
-          <button>&#10003;</button>
-        </div>
-        <div className="item">
-          <p>make breakfast</p>
-          <button>&#10003;</button>
-        </div>
-        <div className="item">
-          <p>make breakfast</p>
-          <button>&#10003;</button>
-        </div>
+        <h3>Done</h3>
+        {toDonesItems}
       </div>
     </div>
   ); // returns is the render
-}
+};
 
 export default ToDonesContainer;
