@@ -10,17 +10,25 @@ class ToDosContainer extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value }); //on key it update the state ,when we update the state it re-render our components.
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // prevent from refreshing
+    this.props.handleAddToDo(this.state.value);
+    this.setState({ value: "" }); //it will update the value of the input and rerender the components
   }
 
   render() {
     const todos = this.props.toDos;
     const todoItems = todos.map(el => {
-      return <ToDoItem todo={el} key={el.text}></ToDoItem>;
+      return (
+        <ToDoItem
+          handleUpdate={this.props.handleUpdateItem}
+          todo={el}
+          key={el.text}
+        ></ToDoItem>
+      );
     });
 
     return (

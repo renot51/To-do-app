@@ -1,21 +1,25 @@
 import React from "react";
 
-const ToDoItem = props => {
-  const statusDoDone = props.todo.done;
-  console.log(statusDoDone);
-  let button;
-  if (statusDoDone) {
-    button = <button>&#10003;</button>;
-  } else {
-    button = <button>&#8634;</button>;
+class ToDoItem extends React.Component {
+  updateItem = () => {
+    this.props.handleUpdate();
+    console.log(this.props);
+  };
+  render() {
+    const statusDoDone = this.props.todo.done;
+    let button;
+    if (statusDoDone) {
+      button = <button onClick={this.updateItem}>&#8634;</button>;
+    } else {
+      button = <button onClick={this.updateItem}>&#10003;</button>;
+    }
+    return (
+      <div className="item">
+        <p>{this.props.todo.text}</p>
+        {button}
+      </div>
+    );
   }
-
-  return (
-    <div className="item">
-      <p>{props.todo.text}</p>
-      {button}
-    </div>
-  );
-};
+}
 
 export default ToDoItem;

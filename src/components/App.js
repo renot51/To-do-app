@@ -20,6 +20,13 @@ class App extends React.Component {
       ]
     };
   }
+  handleUpdateItem = val => {
+    console.log("dsalkf");
+  };
+  handleAddToDo = val => {
+    const toDo = { text: val, done: false };
+    this.setState({ items: [toDo, ...this.state.items] });
+  };
   render() {
     const toDos = this.state.items.filter(el => !el.done);
     const toDones = this.state.items.filter(el => el.done);
@@ -27,10 +34,15 @@ class App extends React.Component {
     return (
       <div className="app">
         <Navigation></Navigation>
-        <ToDosContainer toDos={toDos}></ToDosContainer>
+        <ToDosContainer
+          toDos={toDos}
+          handleUpdateItem={this.handleUpdateItem}
+          handleAddToDo={this.handleAddToDo}
+        ></ToDosContainer>
         <ToDonesContainer toDones={toDones}></ToDonesContainer>
       </div>
     );
   }
 }
+
 export default App;
