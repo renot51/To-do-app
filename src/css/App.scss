@@ -18,10 +18,11 @@ body {
     align-items: center;
     padding: 20px;
   }
+  .toDosContainer {
+    padding-top: 20px;
+  }
   .toDosContainer,
   .toDonesContainer {
-    padding: 20px;
-
     width: 500px;
     .form {
       .input {

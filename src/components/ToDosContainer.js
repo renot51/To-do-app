@@ -47,10 +47,12 @@ class ToDosContainer extends React.Component {
             {/* this is the button*/}
           </form>
         </div>
-        <div className="list">
-          <h3>TO DO</h3>
-          {todoItems}
-        </div>
+        {todos.length > 0 && (
+          <div className="list">
+            <h3>To do</h3>
+            {todoItems}
+          </div>
+        )}
       </div>
     ); // returns is the render
   }

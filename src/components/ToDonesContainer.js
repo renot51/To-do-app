@@ -1,20 +1,29 @@
 import React from "react";
 import ToDoItem from "./ToDoItem";
 
-const ToDonesContainer = props => {
-  const toDones = props.toDones;
-  const toDonesItems = toDones.map(el => {
-    return <ToDoItem todo={el} key={el.text}></ToDoItem>;
-  });
-
-  return (
-    <div className="toDonesContainer">
-      <div className="list">
-        <h3>Done</h3>
-        {toDonesItems}
+class ToDonesContainer extends React.Component {
+  render() {
+    const toDones = this.props.toDones;
+    const toDonesItems = toDones.map(el => {
+      return (
+        <ToDoItem
+          handleUpdate={this.props.handleUpdateItem}
+          todo={el}
+          key={el.text}
+        ></ToDoItem>
+      );
+    });
+    return (
+      <div className="toDonesContainer">
+        {toDones.length > 0 && (
+          <div className="list">
+            <h3>Done</h3>
+            {toDonesItems}
+          </div>
+        )}
       </div>
-    </div>
-  ); // returns is the render
-};
+    );
+  }
+}
 
 export default ToDonesContainer;

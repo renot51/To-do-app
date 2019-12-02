@@ -8,24 +8,40 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        { text: "Wash my face!", done: false },
-        { text: "Walk the dog", done: false },
-        { text: "Pay the rent", done: false },
-        { text: "Make so moneys", done: false },
-        { text: "Make a website", done: true },
-        { text: "Call my mom", done: true },
-        { text: "Finish reading my book", done: true },
-        { text: "Make more moneys", done: true }
-      ]
+      items: []
     };
   }
-  handleUpdateItem = val => {
-    console.log("dsalkf");
+
+  componentDidMount() {
+    const items = localStorage.getItem("toDo-Items");
+    let parst = JSON.parse(items);
+
+    if (!parst) {
+      parst = [];
+    }
+    this.setState({ items: parst });
+
+    console.log(parst);
+  }
+
+  handleUpdateItem = id => {
+    const updatedItems = this.state.items.map(el => {
+      if (el.id === id) {
+        el.done = !el.done;
+
+        return el;
+      }
+      return el;
+    });
+    this.setState({ items: updatedItems });
+    localStorage.setItem("toDo-Items", JSON.stringify(updatedItems));
   };
+
   handleAddToDo = val => {
-    const toDo = { text: val, done: false };
-    this.setState({ items: [toDo, ...this.state.items] });
+    const toDo = { id: new Date().getTime(), text: val, done: false };
+    const items = [toDo, ...this.state.items];
+    this.setState({ items });
+    localStorage.setItem("toDo-Items", JSON.stringify(items));
   };
   render() {
     const toDos = this.state.items.filter(el => !el.done);
@@ -39,7 +55,10 @@ class App extends React.Component {
           handleUpdateItem={this.handleUpdateItem}
           handleAddToDo={this.handleAddToDo}
         ></ToDosContainer>
-        <ToDonesContainer toDones={toDones}></ToDonesContainer>
+        <ToDonesContainer
+          toDones={toDones}
+          handleUpdateItem={this.handleUpdateItem}
+        ></ToDonesContainer>
       </div>
     );
   }
